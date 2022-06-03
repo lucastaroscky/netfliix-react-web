@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
-import Login from './screen/login/login';
+import Login from './screens/login/login';
 import { GlobalStyle } from './themes/main/global-style';
 import { theme } from './themes/main/theme';
 
