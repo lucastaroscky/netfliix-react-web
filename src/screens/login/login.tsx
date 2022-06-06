@@ -6,10 +6,12 @@ import Warning from '../../components/notifications/warning/notification-warning
 import { login } from '../../schemas/login.schema';
 import Logo from '../../components/logo/logo';
 import Wrapper from '../../components/wrapper/wrapper';
+// import { useSelector, useDispatch } from 'react-redux'
 
 export default function Form() {
     const [data, setData] = useState({ email: '', password: '' })
     const [error, setError] = useState('')
+    const dispatch = useDispatch()
 
     const handleChange = useCallback(
         ({ target }: any) => {
