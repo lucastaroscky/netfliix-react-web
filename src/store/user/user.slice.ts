@@ -1,12 +1,13 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { reducers } from "./user.reducer";
+import { createSlice } from '@reduxjs/toolkit';
+import { reducers } from './user.reducer';
+import { User } from './user.type';
 
-const initialState = {
-    authenticatede: false
-}
+const initialState: User = {
+  data: {},
+};
 
 export const userSlice = createSlice({
-    name: 'user',
-    reducers,
-    initialState
-})
+  name: 'user',
+  reducers,
+  initialState,
+});
