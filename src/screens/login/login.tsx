@@ -1,19 +1,30 @@
-import React, { ChangeEvent, useCallback, useState } from 'react';
+import React, {
+  ChangeEvent, useCallback, useEffect, useState,
+} from 'react';
 import { Grid } from '@mui/material';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { errorMessage, getToken } from 'store/user/user.selector';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { MOVIES_LIST_URL } from 'screens/shows/shows.type';
+import { USER_TOKEN_COOKIE } from 'store/user/user.type';
 import Input from '../../components/input/input';
 import Button from '../../components/button/button';
 import Warning from '../../components/form-error/form-error';
 import login from '../../schemas/login.schema';
 import Logo from '../../components/logo/logo';
 import Wrapper from '../../components/wrapper/wrapper';
-import { userSlice } from '../../store/user/user.slice';
+import { userAction } from '../../store/user/user.slice';
 import { Error } from '../../types/yup';
 
 export default function Form() {
   const [data, setData] = useState({ email: '', password: '' });
   const [error, setError] = useState(['']);
+
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const from = useLocation();
+  const userError = useSelector(errorMessage);
+  const token = useSelector(getToken);
 
   const handleChange = useCallback(
     ({ target }: ChangeEvent<HTMLInputElement>) => {
@@ -25,20 +36,33 @@ export default function Form() {
     [setData],
   );
 
-  const resetError = useCallback((errorMessage: string[]) => {
-    resetError(errorMessage);
-  }, []);
-
   const handleSend = useCallback(async () => {
     try {
       await login.validate(data, { abortEarly: false });
 
-      dispatch(userSlice.actions.setData(data));
-      resetError(['']);
+      dispatch(userAction.authentication(data));
     } catch (yupError: any) {
-      setError(((yupError as Error).errors));
+      setError((yupError as Error).errors);
     }
   }, [data]);
+
+  useEffect(() => setError(userError), [userError]);
+
+  useEffect(() => {
+    if (token) {
+      navigate(MOVIES_LIST_URL, {
+        state: from,
+      });
+    }
+  }, [token]);
+
+  useEffect(() => {
+    const localToken = localStorage.getItem(USER_TOKEN_COOKIE);
+
+    if (localToken) {
+      dispatch(userAction.setData({ token: localToken }));
+    }
+  }, []);
 
   return (
     <Wrapper

@@ -1,8 +1,21 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { userSlice } from '../user/user.slice';
+import createSagaMiddleware from 'redux-saga';
+import showsSaga from 'store/shows/show.saga';
+import { showReducer } from 'store/shows/show.slice';
+import userSaga from 'store/user/user.saga';
+import { userReducer } from '../user/user.slice';
 
-export const store = configureStore({
+const saga = createSagaMiddleware();
+
+const store = configureStore({
   reducer: {
-    user: userSlice.reducer,
+    user: userReducer,
+    shows: showReducer,
   },
+  middleware: [saga],
 });
+
+saga.run(userSaga);
+saga.run(showsSaga);
+
+export default store;

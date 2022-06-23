@@ -30,6 +30,6 @@ module.exports = {
         'props': true,
         'ignorePropertyModificationsFor': ['state']
       }],
-    'no-unused-vars': ["error", { "argsIgnorePattern": "^_" }]
+    '@typescript-eslint/no-unused-vars': ["error", { "argsIgnorePattern": "^_" }]
   }
 };
