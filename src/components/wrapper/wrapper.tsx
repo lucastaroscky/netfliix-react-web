@@ -1,7 +1,8 @@
-import { WrapperStyled } from "./wrapper.styled";
+import React from 'react';
+import { WrapperStyled } from './wrapper.styled';
 
 export default function Wrapper(props: any) {
-    return (
-        <WrapperStyled {...props} />
-    )
+  return (
+    <WrapperStyled {...props} />
+  );
 }
