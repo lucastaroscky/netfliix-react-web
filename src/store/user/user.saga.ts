@@ -17,6 +17,12 @@ function* authentication(action: PayloadAction<AuthPayload>) {
   }
 }
 
+function* logout() {
+  yield put(userAction.setData({ token: '' }));
+  localStorage.setItem(USER_TOKEN_COOKIE, '');
+}
+
 export default function* userSaga() {
   yield takeLatest('user/authentication', authentication);
+  yield takeLatest('user/logout', logout);
 }

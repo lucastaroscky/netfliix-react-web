@@ -4,6 +4,8 @@ import { Data, User } from './user.type';
 
 export const authentication = (_state: User, _action: PayloadAction<AuthPayload>) => { };
 
+export const logout = (_state: User, _action: PayloadAction) => { };
+
 export const setData = (state: User, action: PayloadAction<Data>) => {
   state.data = action.payload;
 };

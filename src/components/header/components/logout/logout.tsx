@@ -1,16 +1,31 @@
-import React from 'react';
-import { IconButton } from '@mui/material';
-import { MenuStyled } from './logout.styled';
+import React, { useCallback, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { userAction } from 'store/user/user.slice';
+import { LOGIN_URL } from 'screens/login/login.types';
+import { getToken } from 'store/user/user.selector';
+import Icon from '../icon/icon';
+import { ExitStyled } from './logout.styled';
 
-export default function Menu() {
+export default function Logout() {
+  const token = useSelector(getToken);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const from = useLocation();
+
+  const logoutApp = useCallback(() => {
+    dispatch(userAction.logout());
+  }, []);
+
+  useEffect(() => {
+    if (!token) {
+      navigate(LOGIN_URL, { state: from });
+    }
+  }, [token]);
+
   return (
-    <IconButton
-      size="large"
-      edge="start"
-      color="inherit"
-      aria-label="menu"
-    >
-      <MenuStyled />
-    </IconButton>
+    <Icon>
+      <ExitStyled onClick={logoutApp} />
+    </Icon>
   );
 }
