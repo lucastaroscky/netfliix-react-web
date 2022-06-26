@@ -3,13 +3,16 @@ import { USER_TOKEN_COOKIE } from 'store/user/user.type';
 
 const showService = () => {
   const token = localStorage.getItem(USER_TOKEN_COOKIE);
-
-  const showsList = () => axiosInstance.get('/shows', {
+  const headers = {
     headers: { Authorization: `Bearer ${token}` },
-  });
+  };
+
+  const getShows = () => axiosInstance.get('/shows', headers);
+  const getList = () => axiosInstance.get('/list', headers);
 
   return {
-    showsList,
+    getShows,
+    getList,
   };
 };
 

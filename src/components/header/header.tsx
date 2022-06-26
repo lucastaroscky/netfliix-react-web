@@ -1,12 +1,16 @@
 // eslint-disable-next-line import/no-unresolved
+import Logo from 'components/logo/logo';
 import React from 'react';
+import Menu from './components/logout/logout';
+import Profile from './components/profile/profile';
 import { HeaderStyled } from './header.styled';
-import { Props } from './header.types';
 
-export default function Header({ children }: Props) {
+export default function Header() {
   return (
     <HeaderStyled>
-      {children}
+      <Menu />
+      <Logo />
+      <Profile />
     </HeaderStyled>
   );
 }

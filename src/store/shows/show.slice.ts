@@ -1,24 +1,30 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { listShows, setData, setError } from './show.reducer';
-import { Show, ShowStateName } from './show.types';
+import {
+  getShows,
+  setShows,
+  setError,
+  setList,
+  getMyList,
+} from './show.reducer';
+import { Shows, ShowStateName } from './show.types';
 
-export const initialState: Show = {
-  data: [{
-    id: 0,
-    title: '',
-    cover: '',
-    actors: '',
-    director: '',
-    description: '',
-    category: '',
-    episodes: [],
-  }],
+export const initialState: Shows = {
+  data: {
+    myList: [],
+    list: {},
+  },
   error: '',
 };
 
 const showSlice = createSlice({
   name: ShowStateName,
-  reducers: { listShows, setData, setError },
+  reducers: {
+    getShows,
+    getMyList,
+    setShows,
+    setError,
+    setList,
+  },
   initialState,
 });
 

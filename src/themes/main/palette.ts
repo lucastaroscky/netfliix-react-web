@@ -1,6 +1,7 @@
 const core = {
   primary: '#E31A13',
   secondary: '#1A1A1A',
+  contrast: '#FFF',
 };
 
 const notification = {

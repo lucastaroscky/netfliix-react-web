@@ -7,7 +7,7 @@ export type Episode = {
   showId: number,
 };
 
-export type Data = {
+export type Show = {
   id: number,
   title: string,
   cover: string,
@@ -18,9 +18,18 @@ export type Data = {
   episodes?: Episode[],
 };
 
-export type Show = {
-  data: Data[],
+export type List = {
+  [key: string]: Show[]
+};
+
+export type Data = {
+  myList: Show[]
+  list: List
+};
+
+export type Shows = {
+  data: Data,
   error: string
 };
 
-export const ShowStateName = 'show';
+export const ShowStateName = 'shows';

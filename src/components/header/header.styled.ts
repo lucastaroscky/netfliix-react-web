@@ -6,5 +6,5 @@ export const HeaderStyled = styled(Toolbar)`
     background-color: tansparent;
     flex-direction: row;
     align-content: space-between;
-    justify-content: center;
+    justify-content: space-around;
     `;
